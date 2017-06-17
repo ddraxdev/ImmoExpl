@@ -4,6 +4,27 @@
 public class PropertyListController {
 
 	@AuraEnabled
+	public static List<String> getHouseTypes()
+		{
+			List<Property__c> types = [SELECT Tags__c FROM Property__c];
+			//AuraEnabled Methods returns no set collections.. Workaround:
+			Set<String>houseTypes = new Set<String>();
+			List<String> t = new List<String>();
+			for (Property__c p : types)
+				{
+					if (!houseTypes.contains(p.Tags__c))
+					{
+						houseTypes.add(p.Tags__c);
+					}
+				}
+
+			t.addAll(houseTypes);
+
+
+			return t;
+		}
+
+	@AuraEnabled
 	public static List<String> getLocations()
 		{
 
@@ -48,5 +69,15 @@ public class PropertyListController {
 			system.debug('Properties LIST' + propertyList);
 			String name = '%' + cityFilterKey + '%';
 			return [Select Id, Name,City__c from Property__c WHERE ( City__c LIKE :name) AND Id IN:recordIds LIMIT 50];
+		}
+
+	@AuraEnabled
+	public static List<Property__C> findByHouseType(String houseTypeFilterKey, Property__c[] propertyList )
+		{
+
+			Set<Id> recordIds = new Map<Id, Property__c>(getProperties()).keySet();
+			system.debug('Properties LIST' + propertyList);
+			String name = '%' + houseTypeFilterKey + '%';
+			return [Select Id, Name,City__c from Property__c WHERE ( Tags__c LIKE :name) AND Id IN:recordIds LIMIT 50];
 		}
 }

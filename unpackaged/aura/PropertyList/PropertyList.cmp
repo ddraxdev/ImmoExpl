@@ -2,6 +2,7 @@
     <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
     <aura:handler event="c:SearchKeyChange" action="{!c.searchKeyChange}"/>
     <aura:handler name="onchange" event="c:CityFilterChange" action="{!c.cityFilterChange}"/>
+    <aura:handler name="onchangeType" event="c:HouseTypeFilterChange" action="{!c.houseTypeFilterChange}"/>
 
     <aura:attribute name="properties" type="Property__c[]"/>
     <div class="slds-grid slds-grid_pull-padded-medium">
@@ -40,7 +41,7 @@
         </div>
         <div class="slds-col slds-p-horizontal_medium">
             <!-- Filter Panel Cmp here -->
-            <c:CityFilter />
+            <c:ImmoFilter />
 
         </div>
     </div>

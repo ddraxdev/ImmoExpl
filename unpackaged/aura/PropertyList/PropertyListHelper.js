@@ -39,6 +39,27 @@
                                     });
 
                                     $A.enqueueAction(action);
-                                }
+          },
+           findByHouseType: function(component,event) {
+                    var houseTypeFilterKey = event.getParam("houseTypeFilterKey");
+                                              var propertyList = component.get("v.properties");
+                                              var action = component.get("c.findByHouseType");
+
+                                              action.setParams({
+                                                "houseTypeFilterKey": houseTypeFilterKey,
+                                                "propertyList" : propertyList
+                                              });
+                                              action.setCallback(this, function(response) {
+                                                  		    var state = response.getState();
+
+                                               if(component.isValid() && state === "SUCCESS")
+                                                  {
+                                                  component.set("v.properties", response.getReturnValue());
+                                                  console.log(response.getReturnValue());
+                                                  }
+                                              });
+
+                                              $A.enqueueAction(action);
+                                          }
 
 })

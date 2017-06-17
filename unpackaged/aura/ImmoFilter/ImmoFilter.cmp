@@ -1,8 +1,14 @@
 <aura:component controller="PropertyListController" >
     <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
     <aura:registerEvent name="onchange" type="c:CityFilterChange"/>
+    <aura:registerEvent name="onchangeType" type="c:HouseTypeFilterChange"/>
+
     <aura:attribute name="locations" type="Property__c[]" />
+    <aura:attribute name="houseTypes" type="Property__c[]" />
+
     <aura:attribute name="selectedValue" type="String"/>
+    <aura:attribute name="selectedValueType" type="String"/>
+
     <article class="slds-card">
         <div class="slds-card__header slds-grid">
             <header class="slds-media slds-media_center slds-has-flexi-truncate">
@@ -21,9 +27,9 @@
                             <option value="{!key}">{!location}</option>
                         </aura:iteration>
                     </lightning:select>
-                    <lightning:select name="selectItem" label="Choose a style" value="}" onchange="{}" >
-                        <aura:iteration items="{!v.locations}" var="location" indexvar="key">
-                            <option value="{!key}">{!location}</option>
+                    <lightning:select name="selectItem" label="Choose a style" value="{!v.selectedValueType}" onchange="{!c.houseTypeFilterChange}" >
+                        <aura:iteration items="{!v.houseTypes}" var="houseType" indexvar="key">
+                            <option value="{!key}">{!houseType}</option>
                         </aura:iteration>
                     </lightning:select>
                     <lightning:select name="selectItem" label="Choose a prefered broker" value="}" onchange="{}" >
