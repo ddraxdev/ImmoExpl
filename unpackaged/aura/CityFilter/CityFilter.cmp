@@ -1,0 +1,41 @@
+<aura:component controller="PropertyListController" >
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:registerEvent name="onchange" type="c:CityFilterChange"/>
+    <aura:attribute name="locations" type="Property__c[]" />
+    <aura:attribute name="selectedValue" type="String"/>
+    <article class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+        <span class="slds-icon_container slds-icon-standard-contact" title="description of icon when needed">
+        </span>
+                </div>
+                <div class="slds-media__body">
+                    <h2>
+                        <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="[object Object]">
+                            <span class="slds-text-heading_small">Filter Panel</span>
+                        </a>
+                    </h2>
+                    <lightning:select name="selectItem" label="Choose a city" value="{!v.selectedValue}" onchange="{!c.cityFilterChange}" >
+                        <aura:iteration items="{!v.locations}" var="location" indexvar="key">
+                            <option value="{!key}">{!location}</option>
+                        </aura:iteration>
+                    </lightning:select>
+                    <lightning:select name="selectItem" label="Choose a style" value="}" onchange="{}" >
+                        <aura:iteration items="{!v.locations}" var="location" indexvar="key">
+                            <option value="{!key}">{!location}</option>
+                        </aura:iteration>
+                    </lightning:select>
+                    <lightning:select name="selectItem" label="Choose a prefered broker" value="}" onchange="{}" >
+                        <aura:iteration items="{!v.locations}" var="location" indexvar="key">
+                            <option value="{!key}">{!location}</option>
+                        </aura:iteration>
+                    </lightning:select>
+                </div>
+            </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner">Card Body (custom goes in here)</div>
+    </article>
+
+
+</aura:component>
