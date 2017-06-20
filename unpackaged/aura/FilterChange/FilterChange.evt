@@ -1,0 +1,10 @@
+<aura:event type="APPLICATION" description="Event template" >
+    <aura:attribute name="searchKey" type="String"/>
+    <aura:attribute name="cityFilterKey" type="Object"/>
+    <aura:attribute name="houseTypeFilterKey" type="Object"/>
+    <aura:attribute name="bedFilterKey" type="Object"/>
+    <aura:attribute name="bathFilterKey" type="Object"/>
+    <aura:attribute name="filterName" type="String"/>
+    <aura:attribute name="minValue" type="Object"/>
+    <aura:attribute name="maxValue" type="Object"/>
+</aura:event>

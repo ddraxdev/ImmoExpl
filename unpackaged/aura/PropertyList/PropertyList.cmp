@@ -1,48 +1,7 @@
 <aura:component controller="PropertyListController" >
-    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
-    <aura:handler event="c:SearchKeyChange" action="{!c.searchKeyChange}"/>
-    <aura:handler name="onchange" event="c:CityFilterChange" action="{!c.cityFilterChange}"/>
-    <aura:handler name="onchangeType" event="c:HouseTypeFilterChange" action="{!c.houseTypeFilterChange}"/>
 
-    <aura:attribute name="properties" type="Property__c[]"/>
-    <div class="slds-grid slds-grid_pull-padded-medium">
-        <div class="slds-grid">
+  <c:PropertyOverview>
 
-        </div>
-        <div class="slds-col slds-p-horizontal_medium">
-            <div class="slds-col slds-align-bottom" style="margin-top:10px">
-                <c:SearchBarCmp />
-            </div>
-            <table class="slds-table slds-table--bordered slds-table--cell-buffer slds-max-medium-table--stacked-horizontal">
-                <thead>
-                <tr class="slds-text-heading--label">
-                    <th scope="col" class="nobordertop" title="Property Name">
-                        <div>Property Name</div>
-                    </th>
-                    <th scope="col" class="nobordertop" title="Property City">
-                        <div>Property City</div>
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                <aura:iteration items="{!v.properties}" var="property">
-                    <tr>
-                        <td data-label="Property Name" title="Property Name">
-                            <div>{!property.Name}</div>
-                        </td>
-                        <td data-label="Property City" title="Property City">
-                            <div>{!property.City__c}</div>
-                        </td>
-                    </tr>
-                </aura:iteration>
-                </tbody>
-            </table>
+  </c:PropertyOverview>
 
-        </div>
-        <div class="slds-col slds-p-horizontal_medium">
-            <!-- Filter Panel Cmp here -->
-            <c:ImmoFilter />
-
-        </div>
-    </div>
 </aura:component>

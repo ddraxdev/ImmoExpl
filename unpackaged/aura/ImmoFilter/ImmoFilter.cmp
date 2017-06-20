@@ -1,13 +1,21 @@
 <aura:component controller="PropertyListController" >
+
     <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
-    <aura:registerEvent name="onchange" type="c:CityFilterChange"/>
-    <aura:registerEvent name="onchangeType" type="c:HouseTypeFilterChange"/>
+    <aura:registerEvent name="onchange" type="c:FilterChange"/>
+
+    <!--<aura:registerEvent name="onchange" type="c:CityFilterChange"/> -->
+    <!-- <aura:registerEvent name="onchangeType" type="c:HouseTypeFilterChange"/> -->
 
     <aura:attribute name="locations" type="Property__c[]" />
     <aura:attribute name="houseTypes" type="Property__c[]" />
 
     <aura:attribute name="selectedValue" type="String"/>
     <aura:attribute name="selectedValueType" type="String"/>
+    <aura:attribute name="selectedValueBed" type="Integer"/>
+    <aura:attribute name="selectedValueBath" type="Integer"/>
+    <aura:attribute name="selectedValueMinVal" type="Integer"/>
+    <aura:attribute name="selectedValueMaxVal" type="Integer"/>
+
 
     <article class="slds-card">
         <div class="slds-card__header slds-grid">
@@ -22,25 +30,23 @@
                             <span class="slds-text-heading_small">Filter Panel</span>
                         </a>
                     </h2>
-                    <lightning:select name="selectItem" label="Choose a city" value="{!v.selectedValue}" onchange="{!c.cityFilterChange}" >
+                    <lightning:select name="selectItem" label="Choose a city" value="{!v.selectedValue}" onchange="{!c.filtersChange}" >
                         <aura:iteration items="{!v.locations}" var="location" indexvar="key">
                             <option value="{!key}">{!location}</option>
                         </aura:iteration>
                     </lightning:select>
-                    <lightning:select name="selectItem" label="Choose a style" value="{!v.selectedValueType}" onchange="{!c.houseTypeFilterChange}" >
+                    <lightning:select name="selectItem" label="Choose a style" value="{!v.selectedValueType}" onchange="{!c.filtersChange}" >
                         <aura:iteration items="{!v.houseTypes}" var="houseType" indexvar="key">
                             <option value="{!key}">{!houseType}</option>
                         </aura:iteration>
                     </lightning:select>
-                    <lightning:select name="selectItem" label="Choose a prefered broker" value="}" onchange="{}" >
-                        <aura:iteration items="{!v.locations}" var="location" indexvar="key">
-                            <option value="{!key}">{!location}</option>
-                        </aura:iteration>
-                    </lightning:select>
+                    <lightning:input aura:id="beds" type="number" name="number" label="Bedrooms" value="{!v.selectedValueBed}" onchange="{!c.filtersChange}"  />
+                    <lightning:input aura:id="baths" type="number" name="number" label="Bathrooms" value="{!v.selectedValueBath}" onchange="{!c.filtersChange}" />
+                    <lightning:input aura:id="minVal" type="number" name="number" label="Min price" value="{!v.selectedValueMinVal}" formatter="currency" onchange="{!c.filtersChange}"  />
+                    <lightning:input aura:id="maxVal" type="number" name="number" label="Max price" value="{!v.selectedValueMaxVal}" formatter="currency" onchange="{!c.filtersChange}" />
                 </div>
             </header>
         </div>
-        <div class="slds-card__body slds-card__body_inner">Card Body (custom goes in here)</div>
     </article>
 
 
