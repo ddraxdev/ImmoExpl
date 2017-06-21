@@ -7,6 +7,20 @@
            });
             $A.enqueueAction(action);
         },
+        findDetailsById: function(component,event) {
+                 var action = component.get("c.findDetailsById");
+                 //Set up the callback
+                 var tileID = event.currentTarget.dataset.houseid;
+                // console.log(tileID);
+                  action.setParams({
+                                   "inputID": tileID
+                                 });
+                 action.setCallback(this, function(actionResult) {
+                        component.set("v.details", actionResult.getReturnValue());
+                       // console.log(actionResult.getReturnValue());
+                   });
+                    $A.enqueueAction(action);
+                },
         findByName: function(component,event) {
                 var searchKey = event.getParam("searchKey");
                 var propertyList = component.get("v.properties");
@@ -20,47 +34,6 @@
                 });
                 $A.enqueueAction(action);
             },
-         findByCity: function(component,event) {
-          var cityFilterKey = event.getParam("cityFilterKey");
-                                    var propertyList = component.get("v.properties");
-                                    var action = component.get("c.findByCity");
-
-                                    action.setParams({
-                                      "cityFilterKey": cityFilterKey,
-                                      "propertyList" : propertyList
-                                    });
-                                    action.setCallback(this, function(response) {
-                                        		    var state = response.getState();
-
-                                     if(component.isValid() && state === "SUCCESS")
-                                        {
-                                        component.set("v.properties", response.getReturnValue());
-                                        }
-                                    });
-
-                                    $A.enqueueAction(action);
-          },
-           findByHouseType: function(component,event) {
-                    var houseTypeFilterKey = event.getParam("houseTypeFilterKey");
-                                              var propertyList = component.get("v.properties");
-                                              var action = component.get("c.findByHouseType");
-
-                                              action.setParams({
-                                                "houseTypeFilterKey": houseTypeFilterKey,
-                                                "propertyList" : propertyList
-                                              });
-                                              action.setCallback(this, function(response) {
-                                                  		    var state = response.getState();
-
-                                               if(component.isValid() && state === "SUCCESS")
-                                                  {
-                                                  component.set("v.properties", response.getReturnValue());
-                                                  console.log(response.getReturnValue());
-                                                  }
-                                              });
-
-                                              $A.enqueueAction(action);
-                                          },
 
                                          findByFilters: function(component,event) {
 

@@ -72,8 +72,16 @@ public class PropertyListController {
 	@AuraEnabled
 	public static List<Property__c> getProperties()
 		{
-			List<Property__c> propList = [SELECT Name,City__c,Tags__c,Price__c,Picture__c,Beds__c,Baths__c FROM Property__c];
+			List<Property__c> propList = [SELECT Id,Name,City__c,Tags__c,Price__c,Picture__c,Beds__c,Baths__c FROM Property__c];
 			return propList;
+		}
+
+	@AuraEnabled
+	public static List<Property__c>findDetailsById(Id inputID)
+		{
+			List<Property__c>details = [SELECT Id,Name,City__c,Tags__c,Status__c,Broker__r.Name,Broker__r.Email__c,Broker__r.Picture__c,Zip__c,Price__c,Picture__c,Beds__c,Baths__c FROM Property__c Where Id=:inputID];
+		//	System.debug('info' + details);
+			return details;
 		}
 
 	@AuraEnabled

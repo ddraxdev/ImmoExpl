@@ -3,14 +3,16 @@
     <aura:handler event="c:SearchKeyChange" action="{!c.searchKeyChange}"/>
     <aura:handler name="onchange" event="c:FilterChange" action="{!c.filtersChange}"/>
     <aura:attribute name="properties" type="Property__c[]"/>
+    <aura:attribute name="details" type="Property__c[]"/>
+
     <!--Modal part-->
     <aura:attribute name="isOpen" type="boolean" default="false"/>
 
     <!--Use "slds-m-around- -xx-large" class to add standard Large padding to the component-->
     <div class="slds-m-around--xx-large">
-
         <!--Use aura:if tag to display Model Box, on the bese of conditions. [isOpen boolean attribute] -->
         <aura:if isTrue="{!v.isOpen}">
+            <aura:iteration items="{!v.details}" var="detail">
 
             <!--###### MODAL BOX Start From Here ######-->
             <div role="dialog" tabindex="-1" aria-labelledby="header99" class="slds-modal slds-fade-in-open ">
@@ -21,13 +23,27 @@
                             X
                             <span class="slds-assistive-text">Close</span>
                         </button>
-                        <h2 id="header99" class="slds-text-heading--medium">Property Details</h2>
+                        <h2 id="header99" class="slds-text-heading--medium">Property Details: {!detail.Name}</h2>
                     </div>
                     <!--###### MODAL BOX BODY Part Start From Here ######-->
                     <div class="slds-modal__content slds-p-around--medium">
-                        <p><b>demo
-                        </b>
-                        </p>
+                        <lightning:layout multipleRows="true">
+                            <lightning:layoutItem size="6" padding="around-small">
+                                <ul>
+                                    <li>Price: €{!detail.Price__c} </li>
+                                    <li>Location: {!detail.City__c }</li>
+                                    <li>House Style: {!detail.Tags__c}</li>
+                                    <li>Bedrooms: {!detail.Beds__c}</li>
+                                    <li>Bathrooms: {!detail.Baths__c}</li>
+                                    <li>Broker:  <a href="{!'im:sip:'+detail.Broker__r.Email__c}">{!detail.Broker__r.Name}</a></li>
+                                </ul>
+                            </lightning:layoutItem>
+
+                            <lightning:layoutItem size="6" padding="around-small">
+                                    <img id="img1" src="{!detail.Picture__c}" style="max-width:100%;max-height:50%;height:160px;width:250px;" onclick="c.openModal" />
+                            </lightning:layoutItem>
+                        </lightning:layout>
+
                     </div>
                     <!--###### MODAL BOX FOOTER Part Start From Here ######-->
                     <div class="slds-modal__footer">
@@ -37,8 +53,10 @@
             </div>
             <div class="slds-backdrop slds-backdrop--open"></div>
             <!--###### MODAL BOX Part END Here ######-->
+            </aura:iteration>
 
         </aura:if>
+
     </div>
     <!--End Modal part -->
     <div class="slds-grid slds-grid_pull-padded-medium" style="width:">
@@ -62,7 +80,7 @@
 
                             <input type="radio" id="{!'visual-picker-'+key}"  name="options" />
                             <label for="visual-picker-317">
-        <span class="slds-visual-picker__figure slds-visual-picker__text slds-align_absolute-center" onclick="{!c.openModel}">
+        <span aura:id="detailsTile" data-houseid="{!property.Id}" class="slds-visual-picker__figure slds-visual-picker__text slds-align_absolute-center" onclick="{!c.openModel}">
           <span>
             <span class="slds-text-heading_large">€{!property.Price__c}</span>
             <span class="slds-text-heading_small">{!property.City__c}</span>

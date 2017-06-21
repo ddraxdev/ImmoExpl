@@ -1,6 +1,6 @@
 <aura:component controller="PropertyListController" >
 
-  <c:PropertyOverview>
+  <c:PropertyOverview >
 
   </c:PropertyOverview>
 

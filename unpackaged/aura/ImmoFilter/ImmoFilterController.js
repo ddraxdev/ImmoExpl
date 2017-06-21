@@ -7,25 +7,6 @@ doInit : function(component, event, helper) {
 
 	},
 
-	cityFilterChange : function(component, event, helper) {
-
-                     var changeEvent = component.getEvent("onchange");
-                            changeEvent.setParams({
-                                "cityFilterKey": component.get("v.selectedValue")
-                            });
-                            changeEvent.fire();
-
-	},
-	houseTypeFilterChange: function(component,event,helper)
-	{
- var changeEvent = component.getEvent("onchange");
-                            changeEvent.setParams({
-                                "houseTypeFilterKey": component.get("v.selectedValueType")
-                            });
-                                    console.log(component.get("v.selectedValueType"));
-
-                            changeEvent.fire();
-	},
     filtersChange: function(component,event,helper)
     	{
 
