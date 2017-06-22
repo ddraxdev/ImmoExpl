@@ -10,7 +10,6 @@ doInit : function(component, event, helper) {
     filtersChange: function(component,event,helper)
     	{
 
-
      var changeEvent = component.getEvent("onchange");
                             changeEvent.setParams({
                                     "houseTypeFilterKey": component.get("v.selectedValueType"),

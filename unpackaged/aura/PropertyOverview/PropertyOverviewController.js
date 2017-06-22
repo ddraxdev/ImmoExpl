@@ -9,6 +9,7 @@
         filtersChange:function(component,event,helper)
         {
                 helper.findByFilters(component,event);
+
         },
 openModel: function(component, event, helper) {
       // for Display Model,set the "isOpen" attribute to "true"

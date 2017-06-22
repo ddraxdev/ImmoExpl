@@ -23,7 +23,12 @@
                             X
                             <span class="slds-assistive-text">Close</span>
                         </button>
-                        <h2 id="header99" class="slds-text-heading--medium">Property Details: {!detail.Name}</h2>
+                        <h2 id="header99" class="slds-text-heading--medium">Property Details: {!detail.Name} </h2>
+                        <a href="{! 'https://google.com/maps/search/'+ detail.Address__c +','+ detail.City__c}">
+
+                        <lightning:buttonIcon title="Check this house on Google Maps" iconName="utility:world" variant="bare" alternativeText="Settings" iconClass="dark slds-icon_large" />
+                        </a>
+
                     </div>
                     <!--###### MODAL BOX BODY Part Start From Here ######-->
                     <div class="slds-modal__content slds-p-around--medium">
@@ -75,11 +80,11 @@
 
             <fieldset class="slds-form-element" >
                 <div class="slds-form-element__control">
-                    <aura:iteration items="{!v.properties}" var="property">
-                        <div class="slds-visual-picker slds-visual-picker_medium">
-
-                            <input type="radio" id="{!'visual-picker-'+key}"  name="options" />
-                            <label for="visual-picker-317">
+                    <aura:renderIf isTrue="{!v.properties.length > 0}">
+                        <aura:iteration items="{!v.properties}" var="property">
+                            <div class="slds-visual-picker slds-visual-picker_medium">
+                                <input type="radio" id="{!'visual-picker-'+key}"  name="options" />
+                                <label for="visual-picker-317">
         <span aura:id="detailsTile" data-houseid="{!property.Id}" class="slds-visual-picker__figure slds-visual-picker__text slds-align_absolute-center" onclick="{!c.openModel}">
           <span>
             <span class="slds-text-heading_large">€{!property.Price__c}</span>
@@ -92,15 +97,29 @@
 
           </span>
         </span>
-                                <span class="slds-visual-picker__body">
+                                    <span class="slds-visual-picker__body">
 
         </span>
-                                <span class="slds-icon_container slds-visual-picker__text-check">
+                                    <span class="slds-icon_container slds-visual-picker__text-check">
 
         </span>
-                            </label>
-                        </div>
-                    </aura:iteration>
+                                </label>
+                            </div>
+                        </aura:iteration>
+                        <aura:set attribute="else">
+                            <section class="slds-popover slds-nubbin_left" role="dialog" aria-label="Dialog Title" aria-describedby="dialog-body-id-263">
+                                <button class="slds-button slds-button_icon slds-button_icon-small slds-float_right slds-popover__close slds-button_icon" title="Close dialog">
+
+                                    <span class="slds-assistive-text">Close dialog</span>
+                                </button>
+                                <div class="slds-popover__body" id="dialog-body-id-263">
+                                <h1>Your query returns no records!</h1>
+                                </div>
+                            </section>
+                        </aura:set>
+                    </aura:renderIf>
+
+
                 </div>
             </fieldset>
         </div>

@@ -64,7 +64,8 @@
                                                                                         if(component.isValid() && state === "SUCCESS")
                                                                                            {
                                                                                            component.set("v.properties", response.getReturnValue());
-                                                                                           console.log(response.getReturnValue());
+
+
                                                                                            }
                                                                                        });
 
